@@ -1,0 +1,7 @@
+data/
+*log*/
+*model*/
+locate.txt
+locate
+*.pyc
+BasePredicters/
