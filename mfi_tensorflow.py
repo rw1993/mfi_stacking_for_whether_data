@@ -51,9 +51,10 @@ if FLAGS.train_test == "train":
         sess.run(init)
         epoch = 0
         saver.save(sess, "model/", global_step=epoch)
+        data = pickle.load(open("data/mfi_valid_batch", "rb"))
+        test_data = pickle.load(open("data/mfi_test_batch", "rb"))
         while True:
             sloss = 0.0
-            data = pickle.load(open("data/mfi_valid_batch", "rb"))
             np.random.shuffle(data)
             by = []
             bq = []
@@ -79,7 +80,6 @@ if FLAGS.train_test == "train":
             print("ave loss is {} at epoch {}".format(sloss/len(data), epoch))
             saver.save(sess, "model/", global_step=epoch)
             if epoch % 10 == 0:
-                test_data = pickle.load(open("data/mfi_test_batch", "rb"))
                 before_se = 0.0
                 after_se = 0
                 total = 0
